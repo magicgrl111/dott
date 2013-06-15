@@ -13,6 +13,10 @@
   "dependencies": {
     "express": "3.2.0",
     "less-middleware": "*",
-    "express3-handlebars": "~0.4.1"
+    "express3-handlebars": "~0.4.1",
+    "firebase": "~0.5.4",
+    "crypto": "0.0.3",
+    "imap": "~0.7.12",
+    "mongoose": "~3.6.11"
   }
 }
