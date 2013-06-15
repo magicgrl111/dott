@@ -6,7 +6,9 @@ var express = require('express'),
   handlebars = require('express3-handlebars'),
   routes = require('./routes'),
   http = require('http'),
-  path = require('path');
+  path = require('path'),
+  passport = require('passport'),
+  GoogleStrategy = require('passport-google').Strategy;
 
 var app = express();
 
@@ -33,6 +35,17 @@ if ('development' == app.get('env')) {
 
 // Routes
 app.get('/', routes.index);
+// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+//     /auth/google/return
+app.get('/auth/google', passport.authenticate('google'));
+
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/return', 
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));
 
 // Initialize server
 http.createServer(app).listen(app.get('port'), function(){
