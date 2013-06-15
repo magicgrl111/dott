@@ -1,7 +1,11 @@
 {
   "name": "dott",
   "subdomain": "dott",
-  "version": "0.0.0-3",
+  "domains": [
+    "d.tt",
+    "www.d.tt"
+  ],
+  "version": "0.0.0-5",
   "description": "Web-based mail security",
   "main": "app/app.js",
   "scripts": {
