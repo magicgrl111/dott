@@ -42,7 +42,6 @@ app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://dott:dott@dharma.mongohq.com:10012/dott');
 
 // development only
 if ('development' == app.get('env')) {
