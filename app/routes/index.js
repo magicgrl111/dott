@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-    //User     = mongoose.model('User'),
-    //Message  = mongoose.model('Message'),
+    User     = mongoose.model('User'),
+    Message  = mongoose.model('Message'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google').Strategy;
 
@@ -9,5 +9,7 @@ exports.index = function(req, res){
 };
 
 exports.mailbox = function(req, res){
-  res.render('main', { user: user });
+  var user = new User();
+  console.log(req.query);
+  res.send('layouts/main', { openid: req.query });
 };

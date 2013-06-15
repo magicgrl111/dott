@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    Message  = mongoose.Schema;
+    Schema   = mongoose.Schema;
 
 // Site schema
 var MessageSchema = new Schema({

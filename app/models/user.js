@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    User     = mongoose.Schema;
+    Schema   = mongoose.Schema;
 
 // Site schema
 var UserSchema = new Schema({

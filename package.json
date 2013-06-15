@@ -19,7 +19,6 @@
     "firebase": "~0.5.4",
     "crypto": "0.0.3",
     "imap": "~0.7.12",
-    "mongoose": "~3.6.11",
-    "passport-google": "~0.3.0"
+    "mongoose": "~3.6.11"
   }
 }
