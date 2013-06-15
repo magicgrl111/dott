@@ -21,7 +21,12 @@ fs.readdirSync(models_path).forEach(function (file) {
 var routes = require('./routes');
 var app = express();
 
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+// Create an instance of Handlebars
+var hb = handlebars.create({
+  defaultLayout: 'main'
+});
+
+app.engine('handlebars', hb.engine);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
