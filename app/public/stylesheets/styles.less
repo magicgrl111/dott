@@ -1,67 +1,34 @@
-@navbarwidth:7%;
+@navbarwidth:6%;
 
 *{
   box-sizing:border-box;
 }
 
-@font-face {
-    font-family: 'district';
-    src: url('../fonts/distproth-webfont.eot');
-    src: url('../fonts/distproth-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/distproth-webfont.woff') format('woff'),
-         url('../fonts/distproth-webfont.ttf') format('truetype'),
-         url('../fonts/distproth-webfont.svg#district_prothin') format('svg');
-    font-weight: normal;
-    font-style: normal;
+html, body{
+  height:100%;
+  }
 
-}
-
-@font-face {
-    font-family: 'aleo';
-    src: url('../fonts/aleo-bold-webfont.eot');
-    src: url('../fonts/aleo-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/aleo-bold-webfont.woff') format('woff'),
-         url('../fonts/aleo-bold-webfont.ttf') format('truetype'),
-         url('../fonts/aleo-bold-webfont.svg#aleobold') format('svg');
-    font-weight:700;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'aleo';
-    src: url('../fonts/aleo-light-webfont.eot');
-    src: url('../fonts/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/aleo-light-webfont.woff') format('woff'),
-         url('../fonts/aleo-light-webfont.ttf') format('truetype'),
-         url('../fonts/aleo-light-webfont.svg#aleolight') format('svg');
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'aleo';
-    src: url('../fonts/aleo-regular-webfont.eot');
-    src: url('../fonts/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/aleo-regular-webfont.woff') format('woff'),
-         url('../fonts/aleo-regular-webfont.ttf') format('truetype'),
-         url('../fonts/aleo-regular-webfont.svg#aleoregular') format('svg');
-    font-weight: 400;
-    font-style: normal;
-}
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'aleo', sans-serif;
+  font-family: 'PT Sans', sans-serif;
   font-weight:400;
   -webkit-font-smoothing: antialiased;
 }
 
+p{
+  line-height:24px;
+}
+
+a:hover{
+  color:#18AB89;
+  transition:color .2s;
+}
+
 nav{
-  position:absolute;
-  top:0;
-  left:0;
   width:@navbarwidth;
   height:100%;
   background-color:#111111;
@@ -92,18 +59,28 @@ nav, .message-list, .full-message{
     width:100%;
     height:40px;
     margin:0;
+    color:white;
+    background-color:#111111;
+    border:none;
+    padding-left:20px;
+  }
+  input[placeholder]{
+    font-family: 'PT Sans', sans-serif;
+    font-size:1.6em;
   }
 }
 
 .message-list, .full-message{
-  width:45%;
+  width:(100%-@navbarwidth)/2;
+  background-color:#ebebeb;
+  height:100%;
 }
 
 .message-list{
-  margin-left:@navbarwidth;
+  border-right:1px solid white;
   .indiv-message{
     width:100%;
-    border-bottom:1px solid black;
+    border-bottom:1px solid white;
     padding:15px 0;
     .author, .subject-sum{
       float:left;
@@ -123,22 +100,45 @@ nav, .message-list, .full-message{
     .subject-sum{
       width:60%;
       h2{
-        font-family: 'district', sans-serif;
+        font-family: 'Open Sans Condensed', sans-serif;
         font-size: 1.5em;
       }
     }
     .time{
       float:right;
       width:20%;
-      .status{
-        text-align: center;
+      text-align: center;
+      margin-top:7px;
+      i{
+      width:30%;
+      float:left;
+      font-size:2em;
+      color:#808080;
+      padding-right:5px;
+      }
+      .details{
+        float:left;
+        width:70%;
+        .status{
+          width:15px;
+          height:15px;
+          margin:0 auto;
+          border-radius: 50%;
+          background-color:#C8C832;
+        }
+        h4{
+          margin-top:10px;
+          font-size:.8em;
+        }
       }
     }
   }
 }
 
 .full-message{
+  padding:20px;
   .top{
+    padding-bottom:30px;
     .author, .subject-sum{
         float:left;
       }
@@ -157,12 +157,32 @@ nav, .message-list, .full-message{
     .subject-sum{
       width:60%;
       h2{
-        font-family: 'district', sans-serif;
+        font-family: 'Open Sans Condensed', sans-serif;
         font-size: 1.5em;
       }
     }
+    .actions{
+      width:20%;
+      text-align:right;
+      float:right;
+      font-size:1.2em;
+      i{
+        padding-left:5px;
+      }
+      i:nth-child(1){
+        padding-left:0;
+      }
+    }
+  }
+  .message{
+      padding-bottom:30px;
+      p{
+        padding-bottom:10px;
+      }
   }
   .past-message{
+    border-top:1px solid #cccccc;
+    padding-top:20px;
     .indiv-message{
       width:100%;
       .author{
