@@ -1,15 +1,21 @@
 {
   "name": "dott",
-  "version": "0.0.0",
+  "subdomain": "dott",
+  "version": "0.0.0-3",
   "description": "Web-based mail security",
   "main": "app/app.js",
+  "scripts": {
+    "start": "app/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ndhoule/dott.git"
   },
   "author": "",
-  "license": "MIT",
-  "readmeFilename": "README.md",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
   "dependencies": {
     "express": "3.2.0",
     "less-middleware": "*",
@@ -20,5 +26,12 @@
     "crypto": "0.0.3",
     "imap": "~0.7.12",
     "mongoose": "~3.6.11"
-  }
+  },
+  "readmeFilename": "README.md",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ndhoule/dott/blob/master/LICENSE-MIT"
+    }
+  ]
 }
