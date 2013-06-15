@@ -10,7 +10,12 @@ var express = require('express'),
 
 var app = express();
 
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+// Create an instance of Handlebars
+var hb = handlebars.create({
+  defaultLayout: 'main'
+});
+
+app.engine('handlebars', hb.engine);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
