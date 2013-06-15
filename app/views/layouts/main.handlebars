@@ -4,8 +4,10 @@
   <meta charset='utf-8' />
   <title>dott</title>
 
-  <!-- Live reload -->
-  <script src='//localhost:35729/livereload.js'></script>
+  <!-- Enable live reload in development mode -->
+  {{#if development}}
+    <script src='//localhost:35729/livereload.js'></script>
+  {{/if}}
 
   <!-- LESS Configuration -->
   <script type='text/javascript'>

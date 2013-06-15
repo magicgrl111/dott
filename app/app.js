@@ -10,28 +10,29 @@ var express = require('express'),
   passport = require('passport'),
   GoogleStrategy = require('passport-google').Strategy,
   mongoose = require('mongoose');
-  
+
 // models
 var models_path = __dirname + '/models';
 fs.readdirSync(models_path).forEach(function (file) {
   require(models_path + '/' + file);
 });
 
-
 var routes = require('./routes');
 var app = express();
 
-// Create an instance of Handlebars
-var hb = handlebars.create({
+app.engine('handlebars', handlebars({
   // Set the partials and layouts directories relative to this file's path
   partialsDir: path.join(__dirname, 'views'),
   layoutsDir: path.join(__dirname, 'views', 'layouts'),
 
   // Set the default layout to views/layouts/main.handlebars
-  defaultLayout: 'main'
-});
+  defaultLayout: 'main',
 
-app.engine('handlebars', hb.engine);
+  helpers: {
+    // Returns true if the app is in development mode; false if not
+    development: function() { return app.get('env') === 'development'; }
+  }
+}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
