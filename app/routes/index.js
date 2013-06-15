@@ -13,3 +13,4 @@ exports.mailbox = function(req, res){
   console.log(req.query);
   res.render('mailbox', { openid: req.query });
 };
+
