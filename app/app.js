@@ -5,7 +5,6 @@
 var express = require('express'),
   handlebars = require('express3-handlebars'),
   routes = require('./routes'),
-  user = require('./routes/user'),
   http = require('http'),
   path = require('path');
 
@@ -32,10 +31,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function (req, res) {
-  res.render('home');
-});
+// Routes
+app.get('/', routes.index);
 
+// Initialize server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('dott server listening on port ' + app.get('port'));
 });
