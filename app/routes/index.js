@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-    User     = mongoose.model('User'),
-    Message  = mongoose.model('Message'),
+    //User     = mongoose.model('User'),
+    //Message  = mongoose.model('Message'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google').Strategy;
 
