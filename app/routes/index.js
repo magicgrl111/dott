@@ -11,5 +11,5 @@ exports.index = function(req, res){
 exports.mailbox = function(req, res){
   var user = new User();
   console.log(req.query);
-  res.send('layouts/main', { openid: req.query });
+  res.render('mailbox', { openid: req.query });
 };
