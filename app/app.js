@@ -3,7 +3,7 @@
  */
 
 var express = require('express'),
-  hbs  = require('express3-handlebars'),
+  handlebars = require('express3-handlebars'),
   routes = require('./routes'),
   user = require('./routes/user'),
   http = require('http'),
@@ -11,7 +11,7 @@ var express = require('express'),
 
 var app = express();
 
-app.engine('handlebars', hbs({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -21,10 +21,10 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+app.use(express.cookieParser('your secret here'));
+app.use(express.session());
 app.use(app.router);
-  app.use(require('less-middleware')({ src: __dirname + '/public' }));
+app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
@@ -32,9 +32,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', function (req, res) {
+  res.render('home');
+});
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('dott server listening on port ' + app.get('port'));
 });
