@@ -23,6 +23,11 @@ var app = express();
 
 // Create an instance of Handlebars
 var hb = handlebars.create({
+  // Set the partials and layouts directories relative to this file's path
+  partialsDir: path.join(__dirname, 'views'),
+  layoutsDir: path.join(__dirname, 'views', 'layouts'),
+
+  // Set the default layout to views/layouts/main.handlebars
   defaultLayout: 'main'
 });
 
