@@ -1,0 +1,13 @@
+{
+  "name": "dott",
+  "version": "0.0.0",
+  "description": "Web-based mail security",
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndhoule/dott.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
