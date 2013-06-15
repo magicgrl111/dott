@@ -1,6 +1,6 @@
-var mongoose = require('mongoose'),
-    User     = mongoose.model('User'),
-    Message  = mongoose.model('Message');;
+var mongoose = require('mongoose');
+    // User     = mongoose.model('User'),
+    // Message  = mongoose.model('Message');
 
 exports.index = function(req, res){
   res.render('home');
