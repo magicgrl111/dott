@@ -56,6 +56,7 @@ if ('development' == app.get('env')) {
 // Routes
 app.get('/', routes.index);
 app.get('/mailbox', routes.mailbox);
+
 // logic for passport
 passport.use(new GoogleStrategy({
     returnURL: 'http://localhost:3000/mailbox',
