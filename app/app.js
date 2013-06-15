@@ -4,10 +4,21 @@
 
 var express = require('express'),
   handlebars = require('express3-handlebars'),
-  routes = require('./routes'),
   http = require('http'),
-  path = require('path');
+  path = require('path'),
+  fs = require('fs'),
+  passport = require('passport'),
+  GoogleStrategy = require('passport-google').Strategy,
+  mongoose = require('mongoose');
+  
+// models
+var models_path = __dirname + '/models';
+fs.readdirSync(models_path).forEach(function (file) {
+  require(models_path + '/' + file);
+});
 
+
+var routes = require('./routes');
 var app = express();
 
 // Create an instance of Handlebars
@@ -31,13 +42,37 @@ app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
 // Routes
 app.get('/', routes.index);
+app.get('/mailbox', routes.mailbox);
+// logic for passport
+passport.use(new GoogleStrategy({
+    returnURL: 'http://localhost:3000/mailbox',
+    realm: 'http://localhost:3000'
+  },
+  function(identifier, profile, done) {
+    User.findOrCreate({ openId: identifier }, function(err, user) {
+      done(err, user);
+    });
+  }
+));
+
+// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+//     /auth/google/return
+app.get('/auth/google', passport.authenticate('google'));
+
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/return',
+passport.authenticate('google', { successRedirect: '/mailbox',
+                                    failureRedirect: '/login' }));
 
 // Initialize server
 http.createServer(app).listen(app.get('port'), function(){
