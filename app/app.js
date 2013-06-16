@@ -8,7 +8,7 @@ var express = require('express'),
   path = require('path'),
   fs = require('fs'),
   passport = require('passport'),
-  GoogleStrategy = require('passport-google').Strategy,
+  GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
   mongoose = require('mongoose');
   
 // models
@@ -38,10 +38,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+var User     = mongoose.model('User');
 
 // development only
 if ('development' == app.get('env')) {
@@ -50,29 +53,51 @@ if ('development' == app.get('env')) {
 // Routes
 app.get('/', routes.index);
 app.get('/mailbox', routes.mailbox);
+
 // logic for passport
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findOne(id, function (err, user) {
+    done(err, user);
+  });
+});
+
 passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/mailbox',
-    realm: 'http://localhost:3000'
+    clientID: process.env.DTT_GOOGLE_CLIENT_ID,
+    clientSecret: process.env.DTT_GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/callback"
   },
-  function(identifier, profile, done) {
-    User.findOrCreate({ openId: identifier }, function(err, user) {
-      done(err, user);
+  function(token, tokenSecret, profile, done) {
+    process.nextTick(function () {
+      
+      // To keep the example simple, the user's Google profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Google account with a user record in your database,
+      // and return that user instead.
+      console.log(profile)
+      return done(null, profile);
     });
   }
 ));
 
-// Redirect the user to Google for authentication.  When complete, Google
-// will redirect the user back to the application at
-//     /auth/google/return
-app.get('/auth/google', passport.authenticate('google'));
 
-// Google will redirect the user to this URL after authentication.  Finish
-// the process by verifying the assertion.  If valid, the user will be
-// logged in.  Otherwise, authentication has failed.
-app.get('/auth/google/return',
-passport.authenticate('google', { successRedirect: '/mailbox',
-                                    failureRedirect: '/login' }));
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
+                                            'https://www.googleapis.com/auth/userinfo.email'] }),
+  function(req, res){
+    // The request will be redirected to Google for authentication, so this
+    // function will not be called.
+  });
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // Initialize server
 http.createServer(app).listen(app.get('port'), function(){
