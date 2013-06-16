@@ -1,8 +1,6 @@
 var mongoose = require('mongoose'),
-    User     = mongoose.model('User'),
-    Message  = mongoose.model('Message'),
-    passport = require('passport'),
-    GoogleStrategy = require('passport-google').Strategy;
+  User     = mongoose.model('User'),
+  Message  = mongoose.model('Message');
 
 exports.index = function(req, res){
   res.render('home');
@@ -14,3 +12,6 @@ exports.mailbox = function(req, res){
   res.render('mailbox', { openid: req.query });
 };
 
+exports.auth_google_callback = function(req, res) {
+  res.redirect('/');
+};
