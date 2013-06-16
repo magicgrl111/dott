@@ -9,6 +9,8 @@ var inbox = [
         // if uidvalidity changes, all uid values are void!
         UIDValidity: '664399135',
 
+        subject: "Read this email",
+
         // uid value of the message
         UID: 52,
 
@@ -23,7 +25,8 @@ var inbox = [
         // single "from:" address
         from: {
             name: 'Selby Walker',
-            address: 'selby.e.walker@gmail.com'
+            address: 'selby.e.walker@gmail.com',
+            picture: '/images/kelly.jpg'
         },
 
         // an array of "to:" addresses
@@ -53,6 +56,8 @@ var inbox = [
             // if uidvalidity changes, all uid values are void!
             UIDValidity: '664399135',
 
+            subject: "Your face",
+
             // uid value of the message
             UID: 52,
 
@@ -67,7 +72,8 @@ var inbox = [
             // single "from:" address
             from: {
                 name: 'Selby Walker',
-                address: 'selby.e.walker@gmail.com'
+                address: 'selby.e.walker@gmail.com',
+                picture: '/images/kelly.jpg'
             },
 
             // an array of "to:" addresses
@@ -97,6 +103,8 @@ var inbox = [
             // if uidvalidity changes, all uid values are void!
             UIDValidity: '664399135',
 
+            subject: "Your appointment",
+
             // uid value of the message
             UID: 52,
 
@@ -111,7 +119,8 @@ var inbox = [
             // single "from:" address
             from: {
                 name: 'Selby Walker',
-                address: 'selby.e.walker@gmail.com'
+                address: 'selby.e.walker@gmail.com',
+                picture: '/images/kelly.jpg'
             },
 
             // an array of "to:" addresses
