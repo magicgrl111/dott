@@ -23,16 +23,16 @@
 </div>
 
 <div class="message-list">
-  {{#each message}}
+  {{#each messages}}
   <div class="indiv-message selected">
     <div class="author">
-      <img src="{{message.author.picture}}">
-      <h3>{{message.author.name}}</h3>
+      <img src="{{author.picture}}">
+      <h3>{{from.name}}</h3>
     </div>
 
     <div class="subject-sum">
-      <h2>{{message.subject}}</h2>
-      <p>{{message.body}}</p>
+      <h2>{{subject}}</h2>
+      <p>{{body}}</p>
     </div>
 
     <div class="time">
@@ -40,7 +40,7 @@
       <div class="details">
         <div class="status">
       </div>
-      <h4>{{message.time}}</h4>
+      <h4>{{date}}</h4>
     </div>
   </div>
   {{/each}}
@@ -51,14 +51,14 @@
 <div class="full-message">
   <div class="top clearfix">
     <div class="author">
-      <img src="{{message.author.picture}}">
-      <h3>{{message.author.name}}</h3>
-      <h4>{{message.time}}</h4>
+      <img src="{{author.picture}}">
+      <h3>{{from.name}}</h3>
+      <h4>{{date}}</h4>
     </div>
 
     <div class="subject-sum">
-      <h2>{{message.subject}}</h2>
-      <h3>{{message.recipients}}</h3>
+      <h2>{{subject}}</h2>
+      <h3>{{recipients}}</h3>
     </div>
 
     <div class="actions">
@@ -69,7 +69,7 @@
   </div>
 
   <div class="message">
-    {{message.body}}
+    {{body}}
     <div class="attachment">
       <i class="icon-paper-clip"></i>
       <a href="#">myattachment.pdf</a>
@@ -78,17 +78,17 @@
     <a href="#"><i class="icon-reply"></i></a>
   </div>
 
-  {{#each message}}
+  {{#each messages}}
   <div class="past-message clearfix">
     <div class="indiv-message">
       <div class="author">
-        <img src="{{message.past.author.picture}}">
-        <h3>{{message.past.author.name}}</h3>
-        <h4>{{message.past.time}}</h4>
+        <img src="{{past.author.picture}}">
+        <h3>{{past.author.name}}</h3>
+        <h4>{{past.time}}</h4>
       </div>
 
       <div class="message">
-        {{message.past.body}}
+        {{past.body}}
       </div>
     </div>
   </div>
