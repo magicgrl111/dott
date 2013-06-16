@@ -10,7 +10,7 @@ exports.index = function(req, res){
 
 exports.mailbox = function(req, res){
   var user = new User();
-  console.log(req.query);
+  console.log(req);
   res.render('mailbox', { openid: req.query });
 };
 
