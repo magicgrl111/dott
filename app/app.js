@@ -29,12 +29,10 @@ var User = require('./models/user');
 
 // TODO: Sort
 passport.serializeUser(function(user, done) {
-  debugger;
   done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
-  debugger;
   User.findOne({ _id: id }, function (err, user) {
     done(err, user)
   });
@@ -47,22 +45,24 @@ passport.use(new GoogleStrategy({
   }, function(accessToken, refreshToken, profile, done) {
     User.findById(profile.id).exec(function(err, user) {
       if (!user) {
-        var user = new User({
+        var newUser = new User({
           _id: profile.id,
           provider: 'google',
           email: profile.emails[0].value,
           display_name: profile.displayName,
+          token: accessToken,
           name: {
             first: profile.givenName,
             last: profile.familyName
-          },
-          token: accessToken
+          }
         });
-        return user.save(function(err) {
+        return newUser.save(function(err) {
           if (err) { throw err; }
-          return done(err, user);
+          return done(err, newUser);
         });
       } else {
+    console.log(accessToken);
+        User.update(user._id, {token: accessToken});
         return done(err, user);
       }
     }, function(err, user) {
