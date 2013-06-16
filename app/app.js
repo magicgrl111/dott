@@ -18,6 +18,7 @@ fs.readdirSync(models_path).forEach(function (file) {
 });
 
 var routes = require('./routes');
+var helpers = require('./views/lib/helpers.js');
 var app = express();
 
 app.engine('handlebars', handlebars({
@@ -28,10 +29,7 @@ app.engine('handlebars', handlebars({
   // Set the default layout to views/layouts/main.handlebars
   defaultLayout: 'main',
 
-  helpers: {
-    // Returns true if the app is in development mode; false if not
-    development: function() { return app.get('env') === 'development'; }
-  }
+  helpers: helpers
 }));
 
 // all environments
