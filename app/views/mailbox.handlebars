@@ -1,85 +1,96 @@
 <nav>
+  <div class="logo"></div>
   <ul>
-    <li><a href="#"><i class="icon-pencil"></i></a></li>
-    <li><a href="#"><i class="icon-inbox"></i></a></li>
+    <li  class="compose"><a href="#"><i class="icon-pencil"></i></a></li>
+    <li><a href="#"  class="selected"><i class="icon-inbox"></i></a></li>
     <li><a href="#"><i class="icon-plane"></i></a></li>
     <li><a href="#"><i class="icon-file"></i></a></li>
     <li><a href="#"><i class="icon-trash"></i></a></li>
+    <li><a href="#"><i class="icon-search"></i></a>
     <li><a href="#"><i class="icon-cog"></i></a></li>
   </ul>
-  <div class="logo">
-  </div>
 </nav>
-<div class="search">
-  <input type="text" placeholder="Search">
+
+<div class="compose-message">
+  <form>
+    <div class="exit"><a href="#">&times;</a></div>
+    <input type="text" placeholder="Subject" class="subject">
+    <input type="text" placeholder="To">
+    <textarea></textarea>
+    <input type="submit" value="Send">
+    <a href="#"><i class="icon-trash"></i></a>
+  </form>
 </div>
 
 <div class="message-list">
-  {{#if messages}}
-    {{#each messages}}
-      <div class="indiv-message clearfix">
-        <div class="from">
-          <img src="{{from.picture}}">
-          <h3>{{from.name}}</h3>
-        </div>
+  {{#each messages}}
+  <div class="indiv-message selected">
+    <div class="author">
+      <img src="{{author.picture}}">
+      <h3>{{from.name}}</h3>
+    </div>
 
-        <div class="subject-sum">
-          <h2>{{title}}</h2>
-          <p>{{body}}</p>
-        </div>
+    <div class="subject-sum">
+      <h2>{{subject}}</h2>
+      <p>{{body}}</p>
+    </div>
 
-        <div class="date">
-          <i class="icon-paper-clip"></i>
-
-          <div class="status">
-          </div>
-
-          <h4>{{date}}</h4>
-        </div>
+    <div class="time">
+      <i class="icon-paper-clip"></i>
+      <div class="details">
+        <div class="status">
       </div>
-    {{/each}}
-  {{/if}}
+      <h4>{{date}}</h4>
+    </div>
+  </div>
+  {{/each}}
 </div>
 
+<div class="search"></div>
+
 <div class="full-message">
-  {{#if messages}}
-    {{#each messages}}
-      <div class="top clearfix">
-        <div class="from">
-          <img src="{{from.picture}}">
-          <h3>{{from.name}}</h3>
-        </div>
+  <div class="top clearfix">
+    <div class="author">
+      <img src="{{author.picture}}">
+      <h3>{{from.name}}</h3>
+      <h4>{{date}}</h4>
+    </div>
 
-        <div class="subject-sum">
-          <h2>{{title}}</h2>
-          <h3>{{to}}</h3>
-          <h4>{{date}}</h4>
-        </div>
+    <div class="subject-sum">
+      <h2>{{subject}}</h2>
+      <h3>{{recipients}}</h3>
+    </div>
 
-        <div class="actions">
-          <i class="icon-reply"></i>
-          <i class="icon-reply-all"></i>
-          <i class="icon-trash"></i>
-        </div>
+    <div class="actions">
+      <a href="#"><i class="icon-reply"></i></a>
+      <a href="#"><i class="icon-reply-all"></i></a>
+      <a href="#"><i class="icon-trash"></i></a>
+    </div>
+  </div>
+
+  <div class="message">
+    {{body}}
+    <div class="attachment">
+      <i class="icon-paper-clip"></i>
+      <a href="#">myattachment.pdf</a>
+    </div>
+    <a href="#"><i class="icon-trash"></i></a>
+    <a href="#"><i class="icon-reply"></i></a>
+  </div>
+
+  {{#each messages}}
+  <div class="past-message clearfix">
+    <div class="indiv-message">
+      <div class="author">
+        <img src="{{past.author.picture}}">
+        <h3>{{past.author.name}}</h3>
+        <h4>{{past.time}}</h4>
       </div>
 
       <div class="message">
-        {{body}}
+        {{past.body}}
       </div>
-
-      <div class="past-message">
-        <div class="indiv-message">
-          <div class="from">
-            <img src="{{past.from.picture}}">
-            <h3>{{past.from.name}}</h3>
-            <h4>{{past.from.date}}</h4>
-          </div>
-
-          <div class="message">
-            {{past.body}}
-          </div>
-        </div>
-      </div>
-    {{/each}}
-  {{/if}}
+    </div>
+  </div>
+  {{/each}}
 </div>
