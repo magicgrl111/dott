@@ -55,14 +55,16 @@ passport.use(new GoogleStrategy({
           name: {
             first: profile.givenName,
             last: profile.familyName
-          }
+          },
+          token: accessToken
         });
         return user.save(function(err) {
           if (err) { throw err; }
           return done(err, user);
         });
+      } else {
+        return done(err, user);
       }
-      return done(err, user);
     }, function(err, user) {
       if (err) {throw err;}
       done(null, user._id);
