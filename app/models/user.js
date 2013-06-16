@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  findOrCreate = require('mongoose-findorcreate');
+  Schema = mongoose.Schema;
 
 // Site schema
 var UserSchema = new Schema({
@@ -14,7 +13,4 @@ var UserSchema = new Schema({
   date_joined: { type: Date, default: Date.now }
 });
 
-UserSchema.plugin(findOrCreate);
-
-// Validations
 module.exports = mongoose.model('User', UserSchema);
