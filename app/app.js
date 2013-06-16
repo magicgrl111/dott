@@ -6,8 +6,10 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   fs = require('fs'),
+  _ = require('underscore');
   mongoose = require('mongoose'),
   passport = require('passport'),
+  xoauth2 = require("xoauth2"),
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var db = mongoose.connect('mongodb://localhost:17017/dott');
@@ -29,12 +31,12 @@ var User = require('./models/user');
 
 // TODO: Sort
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  return done(null, user);
 });
 
 passport.deserializeUser(function(id, done) {
   User.findOne({ _id: id }, function (err, user) {
-    done(err, user)
+    return done(err, user);
   });
 });
 
@@ -50,24 +52,40 @@ passport.use(new GoogleStrategy({
           provider: 'google',
           email: profile.emails[0].value,
           display_name: profile.displayName,
-          token: accessToken,
+          access_token: accessToken,
+          refresh_token: refreshToken,
           name: {
             first: profile.givenName,
             last: profile.familyName
           }
         });
-        return newUser.save(function(err) {
+
+        // Generate an xoauth2 token
+        var xoauth2gen = xoauth2.createXOAuth2Generator({
+          user: newUser.email,
+          clientId: clientID,
+          clientSecret: clientSecret,
+          accessToken: newUser.access_token,
+          refreshToken: newUser.refresh_token
+        });
+
+        xoauth2gen.getToken(function(err, token){
           if (err) { throw err; }
-          return done(err, newUser);
+          _.extend(newUser, { xoauth2_token: token });
+
+          return newUser.save(function(err) {
+            if (err) { throw err; }
+            return done(err, newUser);
+          });
         });
       } else {
-    console.log(accessToken);
-        User.update(user._id, {token: accessToken});
+        // Update the accessToken
+        User.update(user._id, { access_token: accessToken });
         return done(err, user);
       }
     }, function(err, user) {
-      if (err) {throw err;}
-      done(null, user._id);
+      if (err) { throw err;}
+      return done(null, user._id);
     });
   }
 ));
@@ -129,7 +147,8 @@ app.get('/mailbox', routes.mailbox);
 //   will redirect the user back to this application at /auth/google/callback
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
-                                            'https://www.googleapis.com/auth/userinfo.email'] }),
+                                            'https://www.googleapis.com/auth/userinfo.email'],
+                                    accessType: 'offline'}),
     function(req, res) {
     // The request will be redirected to Google for authentication, so this
     // function will not be called.

@@ -30,7 +30,10 @@
     "crypto": "0.0.3",
     "imap": "~0.7.12",
     "mongoose": "~3.6.11",
-    "passport-google-oauth": "~0.1.5"
+    "passport-google-oauth": "~0.1.5",
+    "passport-google-oauth-offline": "~0.2.0",
+    "xoauth2": "~0.1.8",
+    "underscore": "~1.4.4"
   },
   "readmeFilename": "README.md",
   "licenses": [

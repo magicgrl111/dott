@@ -10,7 +10,9 @@ var UserSchema = new Schema({
     first: { type: String, trim: true },
     last: { type: String, trim: true }
   },
-  token: { type: String },
+  access_token: { type: String },
+  refresh_token: { type: String },
+  xoauth2_token: { type: String },
   date_joined: { type: Date, default: Date.now }
 });
 
