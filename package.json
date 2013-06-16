@@ -1,11 +1,15 @@
 {
   "name": "dott",
   "subdomain": "dott",
-  "version": "0.0.0",
+  "domains": [
+    "d.tt",
+    "www.d.tt"
+  ],
+  "version": "0.0.0-5",
   "description": "Web-based mail security",
   "main": "app/app.js",
   "scripts": {
-    "start": "app/main.js"
+    "start": "app/app.js"
   },
   "repository": {
     "type": "git",
