@@ -144,7 +144,7 @@ exports.index = function(req, res){
 };
 
 exports.mailbox = function(req, res){
-  res.render('mailbox', { messages: inbox, title:"inbox" });
+  res.render('mailbox', { messages: inbox});
 };
 
 exports.auth_google_callback = function(req, res) {
