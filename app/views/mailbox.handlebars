@@ -10,32 +10,31 @@
   <div class="logo">
   </div>
 </nav>
-
 <div class="search">
   <input type="text" placeholder="Search">
 </div>
 
 <div class="message-list">
-  {{#if message}}
-    {{#each message}}
+  {{#if messages}}
+    {{#each messages}}
       <div class="indiv-message clearfix">
-        <div class="author">
-          <img src="{{message.author.picture}}">
-          <h3>{{message.author.name}}</h3>
+        <div class="from">
+          <img src="{{from.picture}}">
+          <h3>{{from.name}}</h3>
         </div>
 
         <div class="subject-sum">
-          <h2>{{message.subject}}</h2>
-          <p>{{message.body}}</p>
+          <h2>{{title}}</h2>
+          <p>{{body}}</p>
         </div>
 
-        <div class="time">
+        <div class="date">
           <i class="icon-paper-clip"></i>
 
           <div class="status">
           </div>
 
-          <h4>{{message.time}}</h4>
+          <h4>{{date}}</h4>
         </div>
       </div>
     {{/each}}
@@ -43,18 +42,18 @@
 </div>
 
 <div class="full-message">
-  {{#if message}}
-    {{#each message}}
+  {{#if messages}}
+    {{#each messages}}
       <div class="top clearfix">
-        <div class="author">
-          <img src="{{message.author.picture}}">
-          <h3>{{message.author.name}}</h3>
+        <div class="from">
+          <img src="{{from.picture}}">
+          <h3>{{from.name}}</h3>
         </div>
 
         <div class="subject-sum">
-          <h2>{{message.subject}}</h2>
-          <h3>{{message.recipients}}</h3>
-          <h4>{{message.time}}</h4>
+          <h2>{{title}}</h2>
+          <h3>{{to}}</h3>
+          <h4>{{date}}</h4>
         </div>
 
         <div class="actions">
@@ -65,19 +64,19 @@
       </div>
 
       <div class="message">
-        {{message.body}}
+        {{body}}
       </div>
 
       <div class="past-message">
         <div class="indiv-message">
-          <div class="author">
-            <img src="{{message.past.author.picture}}">
-            <h3>{{message.past.author.name}}</h3>
-            <h4>{{message.past.author.time}}</h4>
+          <div class="from">
+            <img src="{{past.from.picture}}">
+            <h3>{{past.from.name}}</h3>
+            <h4>{{past.from.date}}</h4>
           </div>
 
           <div class="message">
-            {{message.past.message.body}}
+            {{past.body}}
           </div>
         </div>
       </div>
