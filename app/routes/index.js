@@ -153,7 +153,7 @@ exports.index = function(req, res){
 };
 
 exports.mailbox = function(req, res){
-  res.render('mailbox', { messages: inbox });
+  res.render('mailbox', { layout: false });
 };
 
 exports.auth_google_callback = function(req, res) {

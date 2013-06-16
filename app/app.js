@@ -12,7 +12,7 @@ var express = require('express'),
   xoauth2 = require("xoauth2"),
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var db = mongoose.connect('mongodb://localhost:17017/dott');
+var db = mongoose.connect('mongodb://localhost:27017/dott');
 
 // Secrets for Google authentication
 var clientID = process.env.DTT_GOOGLE_CLIENT_ID,
