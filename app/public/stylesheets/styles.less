@@ -59,6 +59,7 @@ nav{
     background-color:#e74c3c;
     padding:20px 10px;
     margin-top:0;
+    z-index: 100000;
     &:hover{
       background-color:rgb(167, 49, 37);
       transition: background-color .2s;
@@ -157,6 +158,10 @@ nav, .message-list, .full-message{
       font-size:1.2em;
       -webkit-font-smoothing: antialiased;
       margin-top:3px;
+       &:hover{
+        background-color:rgb(167, 49, 37);
+        transition: background-color .2s;
+      }
     }
     .icon-trash{
       display:inline-block;
@@ -182,7 +187,7 @@ nav, .message-list, .full-message{
 .message-list{
   background-color: white;
   margin-left:@navbarwidth;
-  z-index:10000;
+  z-index:1;
   .indiv-message{
     width:100%;
     height:94px;
