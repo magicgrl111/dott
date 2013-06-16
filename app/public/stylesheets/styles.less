@@ -91,19 +91,23 @@ nav, .message-list, .full-message{
   .message-list{
     width: @navbarwidth*3;
     overflow:hidden;
+    white-space:nowrap;
     transition:width .4s;
+    min-width:(100%-@navbarwidth)/2-5%;
     .indiv-message{
-      width:600px;
+      width:100%;
+      min-width: 100%;
       height:94px;
       overflow:hidden;
-      transition:width .4s;
+      white-space:nowrap;
+      transition:width .4s, min-width .4s;
     }
     &:hover{
       width:(100%-@navbarwidth)/2-5%;
       transition:width .4s;
       .indiv-message{
         width:100%;
-        transition:width .4s;
+        transition:width .4s, min-width .4s;
       }
     }
     &:hover+ .full-message{
