@@ -7,9 +7,7 @@ exports.index = function(req, res){
 };
 
 exports.mailbox = function(req, res){
-  var user = new User();
-  console.log(req);
-  res.render('mailbox', { openid: req.query });
+  res.render('mailbox');
 };
 
 exports.auth_google_callback = function(req, res) {

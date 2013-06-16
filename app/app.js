@@ -161,7 +161,7 @@ app.get('/auth/google',
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/mailbox',
     failureRedirect: '/login'
   }), routes.auth_google_callback);
 
